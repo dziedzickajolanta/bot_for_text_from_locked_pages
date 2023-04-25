@@ -1,0 +1,138 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import os
+
+
+def startBot(password, url):
+    path = r"C:\Users\Jola\Downloads\chromedriver\chromedriver.exe"
+    assert os.path.isfile(path)
+    with open(path, "r") as f:
+        pass
+
+    # giving the path of chromedriver to selenium webdriver
+    driver = webdriver.Chrome(path)
+    driver.maximize_window()  # For maximizing window
+    # opening the website in chrome.
+    driver.get(url)
+    driver.implicitly_wait(5)
+
+    # find the password by inspecting on password input
+    driver.find_element(By.XPATH, "//input[@type='password']").send_keys(password)
+
+    # click on submit
+    mypath = "/html/body/div[1]/div/div[2]/div/div/main/article/div/div[1]/div/div/form/div[1]/p/input"
+    submit_button = driver.find_element(By.XPATH, mypath)
+    submit_button.click()
+    driver.implicitly_wait(5)
+    driver.refresh()
+
+    title = ""
+    path_for_title = "/html/body/div[1]/div/div[2]/div/div/main/article/header/div[1]/h1"
+    ti = driver.find_element(By.XPATH, path_for_title)
+    title_text = (ti.text)
+
+    all_text = ""
+    path_for_body = "/html/body/div[1]/div/div[2]/div/div/main/article/div/div[1]/div"
+    es = driver.find_element(By.XPATH, path_for_body)
+    all_text = (es.text).replace("\n", "\n\n")
+
+    everything: str = str(title_text+"\n\n"+all_text+"\n\n\n").replace("Support the Author!", "")
+    everything = everything.replace("→ Qiang Jin Jiu Novel on JJWXC", "")
+    everything = everything.replace("→ Guide to buy on JJWXC by 書庫", "")
+    everything = everything.replace("As mentioned, chapter 25 onwards are all VIP chapters on JJWXC!", "")
+    everything = everything.replace(
+        "If you have enjoyed the novel so far, please support the author Tang Jiuqing by buying the chapters and the novel on JJWXC!",
+        "")
+    everything = everything.replace(
+        "The Places Glossary has been updated with maps from the audio drama team used in the history lesson by Li Jianyun aka Emperor Xiande.",
+        "")
+    everything = everything.replace("If you like this story, consider supporting the author!", "")
+    everything = everything.replace("Novel || Author || JJWXC || Audio Drama", "")
+    everything = everything.replace("[ How to Buy on JJWXC Guide ]", "")
+    everything = everything.replace("GLOSSARY : Characters", "")
+    everything = everything.replace("GLOSSARY : Places", "")
+    everything = everything.replace("Chapter 25 onwards are all VIP chapters on JJWXC! ", "")
+    everything = everything.replace("#SupportAuthors Guides", "")
+    everything = everything.replace("Getting Access to Advanced Chapters", "")
+    everything = everything.replace("How to Buy on JJWXC || Getting Proof of Purchase", "")
+    everything = everything.replace("Send in Proof of Purchase || Discord", "")
+    everything = everything.replace("PRIMER", "")
+    everything = everything.replace("Special Thanks to:", "")
+    everything = everything.replace("Eggy for suggestion and Suika for editing!<3", "")
+    everything = everything.replace("Copyright secured by Digiprove © 2022", "")
+    everything = everything.replace("Translated with: Yunyun, Lin & Rie<3", "")
+
+
+    with open("text.txt", "a", encoding="utf-8") as f:
+        f.write(str(everything))
+
+def noPassword(url):
+    path = r"C:\Users\Jola\Downloads\chromedriver\chromedriver.exe"
+    assert os.path.isfile(path)
+    with open(path, "r") as f:
+        pass
+
+    # giving the path of chromedriver to selenium webdriver
+    driver = webdriver.Chrome(path)
+    driver.maximize_window()  # For maximizing window
+    # opening the website in chrome.
+    driver.get(url)
+    driver.implicitly_wait(5)
+
+    title = ""
+    path_for_title = "/html/body/div[1]/div/div[2]/div/div/main/article/header/div[1]/h1"
+    ti = driver.find_element(By.XPATH, path_for_title)
+    title_text = (ti.text)
+
+    all_text = ""
+    path_for_body = "/html/body/div[1]/div/div[2]/div/div/main/article/div/div[1]/div"
+    es = driver.find_element(By.XPATH, path_for_body)
+    all_text = (es.text).replace("\n", "\n\n")
+
+    everything: str = str(title_text + "\n\n" + all_text + "\n\n\n").replace("Support the Author!", "")
+    everything = everything.replace("→ Qiang Jin Jiu Novel on JJWXC", "")
+    everything = everything.replace("→ Guide to buy on JJWXC by 書庫", "")
+    everything = everything.replace("As mentioned, chapter 25 onwards are all VIP chapters on JJWXC!", "")
+    everything = everything.replace(
+        "If you have enjoyed the novel so far, please support the author Tang Jiuqing by buying the chapters and the novel on JJWXC!",
+        "")
+    everything = everything.replace(
+        "The Places Glossary has been updated with maps from the audio drama team used in the history lesson by Li Jianyun aka Emperor Xiande.",
+        "")
+    everything = everything.replace("If you like this story, consider supporting the author!", "")
+    everything = everything.replace("Novel || Author || JJWXC || Audio Drama", "")
+    everything = everything.replace("[ How to Buy on JJWXC Guide ]", "")
+    everything = everything.replace("GLOSSARY : Characters", "")
+    everything = everything.replace("GLOSSARY : Places", "")
+    everything = everything.replace("Chapter 25 onwards are all VIP chapters on JJWXC! ", "")
+    everything = everything.replace("#SupportAuthors Guides", "")
+    everything = everything.replace("Getting Access to Advanced Chapters", "")
+    everything = everything.replace("How to Buy on JJWXC || Getting Proof of Purchase", "")
+    everything = everything.replace("Send in Proof of Purchase || Discord", "")
+    everything = everything.replace("PRIMER", "")
+    everything = everything.replace("Special Thanks to:", "")
+    everything = everything.replace("Eggy for suggestion and Suika for editing!<3", "")
+    everything = everything.replace("Copyright secured by Digiprove © 2022", "")
+    everything = everything.replace("Translated with: Yunyun, Lin & Rie<3", "")
+
+    with open("text.txt", "a", encoding="utf-8") as f:
+        f.write(str(everything))
+
+
+password = "Ch3NYaNG"
+
+# for repeating the process for multiple chapters
+
+urls_no_password = []
+for n in range(1,25):
+    urls_no_password.append(f"https://cangji.net/qiangjinjiu/qiangjinjiu-c{n}/")
+
+urls_with_password = []
+for number in range(25, 283):
+    urls_with_password.append(f"https://cangji.net/qiangjinjiu/qiangjinjiu-c{number}/")
+
+for url in urls_no_password:
+    noPassword(url)
+
+for url in urls_with_password:
+    startBot(password, url)
